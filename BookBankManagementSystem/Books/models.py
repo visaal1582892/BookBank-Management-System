@@ -1,19 +1,21 @@
 from django.db import models
+from Registration.models import *
 
-class Category(models.Model):
-    cateid = models.AutoField(primary_key=True)
-    catename = models.CharField(max_length=30)
-class Books(models.Model):
-    bid = models.CharField(primary_key=True,max_length=15)
+class Book(models.Model):
+    bid = models.AutoField(primary_key=True)
     bname = models.CharField(max_length=60)
-    bauth = models.CharField(max_length=50,default=None)
-    cateid = models.ForeignKey(Category,on_delete=models.CASCADE)
-    bprice = models.DecimalField(max_digits=6,decimal_places=2)
-    bdes = models.CharField(max_length=300)
-    bavail = models.CharField(max_length=3)
+    bauthor = models.CharField(max_length=50,default=None)
+    bdescription = models.CharField(max_length=300)
+    did = models.ForeignKey(Department, on_delete=models.CASCADE)
+    bsem = models.IntegerField()
+    bcount = models.IntegerField()
 
-# bavail values
-avail=['No','Yes']
+class Order(models.Model):
+    oid = models.AutoField(primary_key=True)
+    cid = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    bid = models.ForeignKey(Book, on_delete=models.CASCADE)
+    odate = models.DateField()
+    duedate = models.DateField()
 
-# category
-cat={1 : "Fiction", 2 : "Non-Fiction", 3 : "Kids",}
+# borrowDays
+borrowDays = 15

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Bank Management System</title>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+        
+          /* Global Styles */
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+          }
+        
+          .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+        
+          /* Header Styles */
+          header {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+          }
+        
+          header nav ul {
+            list-style: none;
+          }
+        
+          header nav ul li {
+            display: inline;
+            margin-right: 20px;
+          }
+        
+          header nav ul li#right-corner{
+            display: inline;
+            float: right;
+            margin-right: 10px;
+          }
+        
+          header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+          }
+        
+          header nav ul li a:hover {
+            color: #f4c20d;
+            text-decoration: none;
+          }
+        
+          /* Hero Section Styles */
+          .hero {
+            background: url('https://worldstrides.com/wp-content/uploads/2020/11/AdobeStock_236346950_blog-min.jpg') center/cover;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+          }
+        
+          .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+          }
+        
+          .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+          }
+        
+          .btn {
+            display: inline-block;
+            background: #f4c20d;
+            color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+          }
+        
+          .btn:hover {
+            background: #FFD711;
+          }
+        
+          /* Features Section Styles */
+          .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+          }
+        
+          .feature {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+          }
+        
+          .feature:hover {
+            transform: translateY(-5px);
+          }
+        
+          .feature img {
+            width: 100px;
+            margin-bottom: 20px;
+          }
+        
+          .feature h3 {
+            margin-bottom: 10px;
+          }
+        
+          .feature p {
+            font-size: 0.9em;
+            color: #666;
+          }
+        
+          /* Footer Styles */
+          footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        p {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0,0,0,0.4);
+        }
+
+        /* Modal Content */
+        .modal-content {
+          background-color: #fefefe;
+          margin: 15% auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 50%;
+        }
+
+        #foraddnewbook{
+            display : none;
+        }
+
+        #foraddexistingbook{
+            display : none;
+        }
+
+        #forissuebook{
+            display : none;
+        }
+
+        #forcollectbook{
+            display : none;
+        }
+
+        /* The Close Button */
+        .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        .round-img-link {
+            display: inline;
+            border-radius: 50%;
+            overflow: hidden;
+          }
+        
+          .round-img-link img {
+            display: inline;
+            float: right;
+            transition: transform 0.3s ease;
+          }
+
+          .round-img-link img:hover{
+            opacity: 0.7;
+          }
+        
+          .side-tab {
+            position: absolute;
+            top: 0;
+            color: black;
+            right: -300px;
+            width: 300px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: right 0.3s ease;
+          }
+        
+          .side-tab.active {
+            right: 0;
+          }
+
+          img.profile-icon{
+            width: 40px;
+            height: 40px;
+          }
+
+          .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+          }
+  
+          .close-btn:hover,
+          .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+          }
+
+          div.username{
+            display: flex;
+          }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+          <h1>Welcome to Book Bank</h1>
+          <nav>
+            <ul>
+              <li><a href={% url "index" %}>Home</a></li>
+              {% if current_admin_customer.type == customer_type.0 %}
+              <li><a href="{% url 'availableBooks' %}">Available Books</a></li>
+              {% endif %}
+              {% if current_admin_customer.type == customer_type.0 %}
+              <li><a href="{% url 'viewDues' %}">View Dues</a></li>
+              {% endif %}
+              {% if current_admin_customer.type == customer_type.1 %}
+              <li><a href="{% url 'myDues' %}">My Dues</a></li>
+              {% endif %}
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li id = "right-corner"><a href="#" class="round-img-link">
+                {% load static %}
+                <img class = "profile-icon" src="{% static 'images/profile.webp' %}" alt="Background Image">
+              </a></li>
+              <div class="side-tab">
+                <span class="close-btn">&times;</span>
+                <div class="username">
+                <img class = "profile-icon" src="{% static 'images/profile.webp' %}" alt="Background Image">
+                <h2>{{ current_admin_user.username }}</h2>
+                </div><br>
+                <p>Profile</p><br>
+                <p>Logged in as : {{ current_admin_customer.type }}</p><br>
+                <a href="{% url 'logout' %}">Logout</a>
+              </div>
+            </ul>
+          </nav>
+        </header>
+        <section class="hero">
+            {% if current_admin_customer.type == customer_type.0 %}
+            <h1>Welcome To Librarian's Dashboard</h1>
+            <p>Select required operation to perform.</p>
+            <button class="btn" id="addnewbook">Add New Book</button>
+            <button class="btn" id="addexistingbook">Add Existing Book</button>
+            <button class="btn" id="issuebook">Issue Book</button>
+            <button class="btn" id="collectbook">Collect Book</button>
+            {% endif %}
+        {% if current_admin_customer.type == customer_type.1 %}
+        <h1>Welcome to Student's Dashboard</h1>
+          <p>Discover thousands of titles across various genres.</p>
+          <a href="{% url 'availableBooks' %}" class="btn">Browse Books</a>
+          {% endif %}
+        </section>
+        <section class="features">
+          <div class="feature">
+              {% load static %}
+            <img src="{% static 'images/wide.webp' %}" alt="Bookshelf">
+            <h3>Wide Selection</h3>
+            <p>Choose from a diverse range of books catering to different interests and subjects.</p>
+          </div>
+          <div class="feature">
+              {% load static %}
+            <img src="{% static 'images/borr.jpg' %}" alt="Library">
+            <h3>Convenient Borrowing</h3>
+            <p>Borrow books easily and manage your borrowing history seamlessly.</p>
+          </div>
+          <div class="feature">
+              {% load static %}
+            <img src="{% static 'images/comm.jpg' %}" alt="Community">
+            <h3>Engaging Community</h3>
+            <p>Connect with fellow readers, share recommendations, and participate in discussions.</p>
+          </div>
+        </section>
+        <footer>
+          <p>&copy; 2024 Book Bank. All rights reserved.</p>
+        </footer>
+      </div>
+    
+    
+
+    <div id="myModal" class="modal">
+        <div class="modal-content" id="foraddnewbook" >
+            <span class="close">&times;</span>
+            <h2>Add New Book Here</h2>
+            <form id="myForm" action="{% url 'addNewBooks' %}" method="post">
+                {% csrf_token %}
+                <label for="bookName">Book Name:</label>
+        <input type="text" id="bookName" name="bookName" required><br>
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required><br>
+
+        <label for="description">Book Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
+
+        <label for="department">Department:</label>
+        <select id="department" name="department" required>
+            {% for department in departments %}
+            <option value={{ department.dname }}>{{ department.dname }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="semester">Semester:</label>
+        <select id="semester" name="semester" required>
+            {% for semester in  semesters%}
+            <option value={{ semester }}>Semester {{ semester }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="bookCount">Book Count:</label>
+        <input type="number" id="bookCount" name="bookCount" min="1" required><br><br>
+
+        <input type="submit" value="Add Books">
+            </form>
+        </div>
+
+        <div class="modal-content" id="foraddexistingbook" >
+            <span class="close">&times;</span>
+            <h2>Add Your Existing Books Here</h2>
+            <form id="myForm" action="{% url 'addExistingBooks' %}" method="post">
+                {% csrf_token %}
+                <label for="bookId">Book ID:</label>
+        <input type="text" id="bookId" name="bookId" required>
+
+        <label for="bookCount">Book Count:</label>
+        <input type="number" id="bookCount" name="bookCount" min="1" required><br><br>
+
+        <button type="submit">Add Books</button>
+            </form>
+        </div>
+
+        <div class="modal-content" id="forissuebook" >
+            <span class="close">&times;</span>
+            <h2>Issue Book Here</h2>
+            <form id="myForm" action="{% url 'issueBook' %}" method="post">
+                {% csrf_token %}
+                <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required>
+
+        <label for="bookId">Book ID:</label>
+        <input type="text" id="bookId" name="bookId" required>
+
+        <button type="submit">Issue Book</button>
+            </form>
+        </div>
+
+        <div class="modal-content" id="forcollectbook" >
+            <h2>Collect Book Here</h2>
+            <span class="close">&times;</span>
+            <form id="myForm" action="{% url 'collectBook' %}" method="post">
+                {% csrf_token %}
+                <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required>
+
+        <label for="bookId">Book ID:</label>
+        <input type="text" id="bookId" name="bookId" required>
+
+        <button type="submit">Collect Book</button>
+            </form>
+        </div>
+
+
+    </div>
+
+    <script>
+        {% for message in messages %}
+        alert("{{ message }}")
+        {% endfor %}
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const roundImgLink = document.querySelector('.round-img-link');
+    const sideTab = document.querySelector('.side-tab');
+    const closeBtn = document.querySelector('.close-btn');
+
+    roundImgLink.addEventListener('click', function(event) {
+      event.preventDefault();
+      sideTab.classList.add('active');
+    });
+    closeBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        sideTab.classList.remove('active');
+    });
+
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            var addnewbook = document.getElementById("addnewbook");
+            var foraddnewbook = document.getElementById("foraddnewbook");
+
+            var addexistingbook = document.getElementById("addexistingbook");
+            var foraddexistingbook = document.getElementById("foraddexistingbook");
+
+            var issuebook = document.getElementById("issuebook");
+            var forissuebook = document.getElementById("forissuebook");
+
+            var collectbook = document.getElementById("collectbook");
+            var forcollectbook = document.getElementById("forcollectbook");
+
+            // When the user clicks the button, open the modal
+            addnewbook.onclick = function() {
+              modal.style.display = "block";
+              foraddnewbook.style.display = "block";
+              foraddexistingbook.style.display = "none";
+              forissuebook.style.display = "none";
+              forcollectbook.style.display = "none";
+              foradddepartment.style.display = "none";
+            }
+
+            addexistingbook.onclick = function() {
+                modal.style.display = "block";
+                foraddnewbook.style.display = "none";
+              foraddexistingbook.style.display = "block";
+              forissuebook.style.display = "none";
+              forcollectbook.style.display = "none";
+              foradddepartment.style.display = "none";
+            }
+
+            issuebook.onclick = function() {
+                modal.style.display = "block";
+                foraddnewbook.style.display = "none";
+              foraddexistingbook.style.display = "none";
+              forissuebook.style.display = "block";
+              forcollectbook.style.display = "none";
+              foradddepartment.style.display = "none";
+            }
+
+            collectbook.onclick = function() {
+                modal.style.display = "block";
+                foraddnewbook.style.display = "none";
+              foraddexistingbook.style.display = "none";
+              forissuebook.style.display = "none";
+              forcollectbook.style.display = "block";
+              foradddepartment.style.display = "none";
+            }
+
+            
+            closeonx = function(){
+                modal.style.display = "none";
+            }
+
+            for (var i=0; i<document.getElementsByClassName("close").length; i++)
+            {
+                span = document.getElementsByClassName("close")[i];
+                span.onclick = closeonx;
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+        });
+    </script>
+</body>
+</html>

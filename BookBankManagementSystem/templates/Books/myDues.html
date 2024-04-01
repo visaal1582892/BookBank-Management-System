@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4c20d;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+        
+          /* Global Styles */
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+          }
+        
+          .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+        
+          /* Header Styles */
+          header {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+          }
+        
+          header nav ul {
+            list-style: none;
+          }
+        
+          header nav ul li {
+            display: inline;
+            margin-right: 20px;
+          }
+        
+          header nav ul li#right-corner{
+            display: inline;
+            float: right;
+            margin-right: 20px;
+          }
+        
+          header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+          }
+        
+          header nav ul li a:hover {
+            color: #f4c20d;
+            text-decoration: none;
+          }
+
+          .btn {
+            display: inline-block;
+            background: #f4c20d;
+            color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+          }
+        
+          .btn:hover {
+            background: #f7d429;
+          }
+
+          select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+          }
+          footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+          <h1>Welcome to Book Bank</h1>
+          <nav>
+            <ul>
+              <li><a href={% url "index" %}>Home</a></li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+        {% if dues %}
+    <table>
+        <thead>
+            <tr>
+                <th>Order Id</th>
+                <th>Book Name</th>
+                <th>Ordered Date</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+    {% for book in current_books %}
+        <tbody>
+            <tr>
+                <td>{{ due.oid }}</td>
+                <td>{{ due.bid.bname }}</td>
+                <td>{{ due.odate }}</td>
+                <td>{{ due.duedate }}</td>
+            </tr>
+    {% endfor %}
+</tbody>
+</table>
+        {% else %}
+        <h2>No Dues Available right now</h2>
+            {% endif %}
+        </main>
+        <footer>
+          <p>&copy; 2024 Book Bank. All rights reserved.</p>
+        </footer>
+      </div>
+</body>
+</html>
+
