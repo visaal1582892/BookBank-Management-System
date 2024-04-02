@@ -117,6 +117,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           }
+
     </style>
 </head>
 <body>
@@ -129,11 +130,6 @@
             </ul>
           </nav>
         </header>
-        <main>
-            {% comment %} <section>
-                <h2>About Us</h2>
-                <p>This is a paragraph about our company.</p>
-            </section> {% endcomment %}
             <h2>Select Department and Semester</h2>
         <form action="{% url "availableBooks" %}" method="post" >
             {% csrf_token %}
