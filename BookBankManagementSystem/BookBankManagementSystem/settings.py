@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE'  : 'django.db.backends.mysql', # <-- UPDATED line
         'NAME'    : 'BookBankManagementSystem',
         'USER'    : 'root',                     # <-- UPDATED line
-        'PASSWORD': 'LiveClass',              # <-- UPDATED line
+        'PASSWORD': '',              # <-- UPDATED line
         'HOST'    : 'localhost',                # <-- UPDATED line
         'PORT'    : '3306',
     }
