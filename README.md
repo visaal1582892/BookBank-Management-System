@@ -91,10 +91,6 @@ A web-based application designed to manage a book bank system efficiently. This 
 8. **Access the Application**  
    Open `http://127.0.0.1:8000` in your browser.  
 
-## Screenshots/Demos  
-
-*(Include screenshots or demo GIFs if available)*  
-
 ## Contributing  
 
 Contributions are welcome! Feel free to fork the repository and submit pull requests.  
